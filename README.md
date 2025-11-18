@@ -1,43 +1,40 @@
 CEC Website Revamped
 
-A full-stack web application featuring a Next.js frontend, Express backend, Supabase database, and Cloudflare R2 storage.
+A full stack web application featuring a Next.js frontend, an Express backend, a Supabase PostgreSQL database, and Cloudflare R2 storage.
 
-🏗 Project Structure
+Project Structure
 
 This project uses a Monorepo structure:
 
-client/: The Frontend (Next.js + Tailwind CSS) hosted on Vercel.
+cec-website-revamped/
+│
+├── client/   # Frontend (Next.js + Tailwind CSS) hosted on Vercel
+├── server/   # Backend (Express.js + Node.js) hosted on DigitalOcean
 
-server/: The Backend (Express.js + Node.js) hosted on DigitalOcean.
-
-🚀 Getting Started
-
+Getting Started
 1. Clone the Repository
-
-git clone [https://github.com/your-username/cec-website-revamped.git](https://github.com/your-username/cec-website-revamped.git)
+git clone https://github.com/your-username/cec-website-revamped.git
 cd cec-website-revamped
 
+2. Backend Setup (server)
 
-2. Backend Setup (Server)
+The backend handles all API requests, database connections, and file uploads.
 
-The backend handles API requests, database connections, and file uploads.
-
-Install Dependencies:
-
+Install Dependencies
 cd server
 npm install
 
-
-Configure Environment Variables:
+Configure Environment Variables
 
 Create a file named .env inside the server/ folder.
 
-Add the following keys (see How to get Keys below):
+Add the following keys:
 
 PORT=4000
+
 # Database (Supabase)
 DATABASE_URL=postgresql://postgres:[YOUR_PASSWORD]@db.xyz.supabase.co:5432/postgres
-SUPABASE_URL=[https://your-project.supabase.co](https://your-project.supabase.co)
+SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_KEY=your_service_role_key
 
 # Storage (Cloudflare R2)
@@ -46,105 +43,86 @@ R2_ACCESS_KEY_ID=your_r2_access_key
 R2_SECRET_ACCESS_KEY=your_r2_secret_key
 R2_BUCKET_NAME=cec-uploads
 
-
-Run the Server:
-
+Run the Server
 npm run dev
 
 
-The server will start at http://localhost:4000.
+Server runs at:
 
-3. Frontend Setup (Client)
+http://localhost:4000
 
-The frontend connects to the backend API.
+3. Frontend Setup (client)
 
-Install Dependencies:
+The frontend connects directly to the backend API.
 
+Install Dependencies
 cd ../client
 npm install
 
+Configure Environment Variables
 
-Configure Environment Variables:
+Create a file named .env.local inside the client/ folder:
 
-Create a file named .env.local inside the client/ folder.
-
-Add the API URL:
-
-# For local development
 NEXT_PUBLIC_API_URL=http://localhost:4000
 
-# For production (Vercel), update this in the Vercel Dashboard
 
+For production, update this value in the Vercel Dashboard.
 
-Run the Frontend:
-
+Run the Frontend
 npm run dev
 
 
-The website will start at http://localhost:3000.
+Frontend runs at:
 
-🔑 How to Get Your Keys
+http://localhost:3000
 
-1. Supabase (Database)
+How to Get Your Keys
+Supabase (Database)
 
-DATABASE_URL: Go to Supabase Dashboard → Settings → Database → Connection String → URI. (Don't forget to replace [YOUR-PASSWORD] with your actual DB password).
+DATABASE_URL
+Supabase Dashboard → Settings → Database → Connection String → URI
+Replace [YOUR-PASSWORD] with your actual password.
 
-SUPABASE_URL: Go to Settings → API.
+SUPABASE_URL
+Supabase Dashboard → Settings → API.
 
-SUPABASE_KEY: Go to Settings → API → Project API Keys. Use the service_role (secret) key for the backend.
+SUPABASE_KEY
+Supabase Dashboard → Settings → API → Project API Keys.
+Use the service_role key for backend only.
 
-2. Cloudflare R2 (Storage)
+Cloudflare R2 (Storage)
 
-Account ID: R2 Dashboard → Right sidebar (Account Details).
+Account ID
+R2 Dashboard → Right sidebar.
 
-Access/Secret Keys: R2 Dashboard → Manage R2 API Tokens → Create API Token.
+Access and Secret Keys
+R2 Dashboard → Manage R2 API Tokens → Create API Token.
+Permissions: Object Read and Write.
 
-Permissions: Object Read & Write.
+Bucket Name
+The bucket you created (example: cec-uploads).
 
-Bucket: Select your specific bucket (cec-uploads).
-
-Bucket Name: The name you gave the bucket (e.g., cec-uploads).
-
-🛠 API Endpoints
-
-Method
-
-Endpoint
-
-Description
-
-GET
-
-/
-
-Health check (Returns "API is running")
-
-POST
-
-/upload
-
-Uploads a file to Cloudflare R2. Expects a form-data body with key file.
-
-GET
-
-/test-db
-
-Verifies connection to Supabase notes table.
-
-📦 Deployment
-
+API Endpoints
+Method	Endpoint	Description
+GET	/	Health check. Returns "API is running".
+POST	/upload	Uploads file to Cloudflare R2. Expects file in form-data.
+GET	/test-db	Tests connection to Supabase notes table.
+Deployment
 Frontend (Vercel)
 
-Import the client folder as the Root Directory in Vercel.
+Import the client/ folder as the root directory.
 
-Add the NEXT_PUBLIC_API_URL environment variable in Vercel Settings.
+Add NEXT_PUBLIC_API_URL in Vercel Environment Variables.
 
 Backend (DigitalOcean Droplet)
 
 SSH into the droplet.
 
-Clone the repo and navigate to server/.
+Clone the repo and go to server/.
 
-Add .env file with production secrets.
+Add your production .env file.
 
-Run npm run build then pm2 start dist/index.js.
+Build and run:
+
+npm run build
+npm start
