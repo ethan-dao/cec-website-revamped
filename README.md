@@ -7,9 +7,8 @@ A full stack web application featuring a Next.js frontend, an Express backend, a
 This project uses a Monorepo structure:
 
 cec-website-revamped/
-│
-├── client/   # Frontend (Next.js + Tailwind CSS) hosted on Vercel
-├── server/   # Backend (Express.js + Node.js) hosted on DigitalOcean
+- ├── client/   # Frontend (Next.js + Tailwind CSS) hosted on Vercel
+- ├── server/   # Backend (Express.js + Node.js) hosted on DigitalOcean
 
 # Getting Started
 ## 1. Clone the Repository
