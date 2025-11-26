@@ -12,7 +12,7 @@ cec-website-revamped/
 
 # Getting Started
 ## 1. Clone the Repository
-- git clone https://github.com/your-username/cec-website-revamped.git
+- git clone https://github.com/ethan-dao/cec-website-revamped.git
 - cd cec-website-revamped
 
 ## 2. Backend Setup (server)
