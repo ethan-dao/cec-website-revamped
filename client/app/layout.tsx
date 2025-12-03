@@ -16,7 +16,7 @@ const akkurat = localFont({
       style: "normal",
     },
   ],
-  variable: "--font-akkurat", // Optional: Use this CSS variable in Tailwind
+  variable: "--font-akkurat",
 });
 
 export const metadata: Metadata = {
